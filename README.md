@@ -34,7 +34,7 @@ If npm doesn't end up working for you, you can just copy and paste this repo's p
 
 To dial the phone without user interaction on Android your app must request permission to dial. To do so, add the following line to your project's AndroidManifest.xml:
 
-```
+```xml
 <uses-permission android:name="android.permission.CALL_PHONE" />
 ```
 
@@ -42,7 +42,7 @@ To dial the phone without user interaction on Android your app must request perm
 
 To use the phone module you must first `require()` it from your project's `node_modules` directory:
 
-```
+```js
 var phone = require( "./node_modules/nativescript-phone/phone" );
 ```
 
@@ -56,7 +56,7 @@ After you have a reference to the module you can then call the availabl methods.
 
 For example, the code below dials the number without showing the device specific confirmation prompt:
 
-```
+```js
 // my-page.js
 var phone = require( "/path/to/node_modules/nativescript-phone" );
 phone.dial("212-555-1234");
@@ -68,7 +68,7 @@ phone.dial("212-555-1234");
 
 For example, the code below opens the sms app for the provided number:
 
-```
+```js
 // my-page.js
 var phone = require( "/path/to/node_modules/nativescript-phone" );
 phone.sms("212-555-1234","My message");

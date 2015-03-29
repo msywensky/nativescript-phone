@@ -1,0 +1,8 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <StackLayout>
+    <Label text="Enter Number" cssClass="title"/>
+    <TextField width="100" text="Call Number" id="number" hint="phone/text number" />
+    <Button text="Call Number" tap="callNumber" />
+    <Button text="Text Number" tap="textNumber" />
+  </StackLayout>
+</Page>

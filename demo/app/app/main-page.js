@@ -1,7 +1,9 @@
 var observable = require("data/observable");
+var phone = require("./node_modules/nativescript-phone/phone");
+
 var vm = new observable.Observable();
 
-mainViewModel.set("number", "800-555-5555");
+vm.set("number", "800-555-5555");
 
 // Event handler for Page "loaded" event attached in main-page.xml
 function pageLoaded(args) {
@@ -10,11 +12,13 @@ function pageLoaded(args) {
 }
 
 function callNumber() {
-
+  var number = vm.get("number");
+  phone.dial(number,true);
 }
 
 function textNumber() {
-  
+  var number = vm.get("number");
+  phone.sms(number,"testing");
 }
 
 exports.pageLoaded = pageLoaded;

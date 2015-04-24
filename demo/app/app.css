@@ -1,4 +1,4 @@
-.title {
+label {
     font-size: 30;
     horizontal-align: center;
     margin:20;
@@ -9,8 +9,7 @@ button {
     horizontal-align: center;
 }
 
-.message {
-    font-size: 20;
-    color: #284848;
+textfield {
     horizontal-align: center;
+    font-size: 30;
 }

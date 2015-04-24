@@ -35,7 +35,7 @@ var UITextFieldDelegateImpl = (function (_super) {
     };
     UITextFieldDelegateImpl.prototype.textFieldDidEndEditing = function (textField) {
         if (this._owner.updateTextTrigger === enums.UpdateTextTrigger.focusLost) {
-            this._owner._onPropertyChangedFromNative(textBase.textProperty, textField.text);
+            this._owner._onPropertyChangedFromNative(textBase.TextBase.textProperty, textField.text);
         }
         this._owner.dismissSoftInput();
     };
@@ -45,7 +45,8 @@ var UITextFieldDelegateImpl = (function (_super) {
     };
     UITextFieldDelegateImpl.prototype.textFieldShouldChangeCharactersInRangeReplacementString = function (textField, range, replacementString) {
         if (this._owner.updateTextTrigger === enums.UpdateTextTrigger.textChanged) {
-            this._owner._onPropertyChangedFromNative(textBase.textProperty, textField.text);
+            var newText = NSString.alloc().initWithString(textField.text).stringByReplacingCharactersInRangeWithString(range, replacementString);
+            this._owner._onPropertyChangedFromNative(textBase.TextBase.textProperty, newText);
         }
         return true;
     };
@@ -58,8 +59,15 @@ var TextField = (function (_super) {
         _super.call(this);
         this._ios = new UITextField();
         this._delegate = UITextFieldDelegateImpl.new().initWithOwner(this);
-        this._ios.delegate = this._delegate;
     }
+    TextField.prototype.onLoaded = function () {
+        _super.prototype.onLoaded.call(this);
+        this._ios.delegate = this._delegate;
+    };
+    TextField.prototype.onUnloaded = function () {
+        this._ios.delegate = null;
+        _super.prototype.onUnloaded.call(this);
+    };
     Object.defineProperty(TextField.prototype, "ios", {
         get: function () {
             return this._ios;

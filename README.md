@@ -4,21 +4,22 @@ A NativeScript module providing phone actions for Android and iOS.
 
 ## Installation
 
-Run `npm install nativescript-phone --save` from your project's inner `app` directory:
+Run `npm install nativescript-phone --save` from your project's `app` directory:
 
 ```
 .
-├── app
-│   ├── app <------------------------------ run npm install from here
-│   │   ├── app.css
-│   │   ├── app.js
-│   │   ├── bootstrap.js
-│   │   ├── main-page.js
-│   │   ├── main-page.xml
-│   │   ├── node_modules
-│   │   │   └── nativescript-phone <-- The install will place the module's code here
-│   │   │       └── ...
-│   │   └── package.json <----------------- The install will register “nativescript-phone” as a dependency here
+├── app  <------------------------------ run npm install from here
+│   ├── App_Resources
+│   │   ├── android
+│   │   └── ios
+│   ├── app.css
+│   ├── app.js
+│   ├── main-page.js
+│   ├── main-page.xml
+│   ├── node_modules
+│   │   └── nativescript-phone <-- The install will place the module's code here
+│   │       └── ...
+│   └── package.json <----------------- The install will register “nativescript-phone” as a dependency here
 │   └── tns_modules
 │       └── ...
 └── platforms

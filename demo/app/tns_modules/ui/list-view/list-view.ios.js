@@ -7,6 +7,7 @@ var __extends = this.__extends || function (d, b) {
 var common = require("ui/list-view/list-view-common");
 var utils = require("utils/utils");
 var view = require("ui/core/view");
+var color = require("color");
 var CELLIDENTIFIER = "cell";
 var ITEMLOADING = common.knownEvents.itemLoading;
 var LOADMOREITEMS = common.knownEvents.loadMoreItems;
@@ -78,6 +79,15 @@ var UITableViewDelegateImpl = (function (_super) {
         if (indexPath.row === this._owner.items.length - 1) {
             this._owner.notify({ eventName: LOADMOREITEMS, object: this._owner });
         }
+        if (cell.separatorInset) {
+            cell.separatorInset = UIEdgeInsetsZero;
+        }
+        if (cell.preservesSuperviewLayoutMargins) {
+            cell.preservesSuperviewLayoutMargins = false;
+        }
+        if (cell.layoutMargins) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
     };
     UITableViewDelegateImpl.prototype.tableViewWillSelectRowAtIndexPath = function (tableView, indexPath) {
         var cell = tableView.cellForRowAtIndexPath(indexPath);
@@ -102,6 +112,16 @@ var UITableViewDelegateImpl = (function (_super) {
     UITableViewDelegateImpl.ObjCProtocols = [UITableViewDelegate];
     return UITableViewDelegateImpl;
 })(NSObject);
+function onSeparatorColorPropertyChanged(data) {
+    var bar = data.object;
+    if (!bar.ios) {
+        return;
+    }
+    if (data.newValue instanceof color.Color) {
+        bar.ios.separatorColor = data.newValue.ios;
+    }
+}
+common.ListView.separatorColorProperty.metadata.onSetNativeValue = onSeparatorColorPropertyChanged;
 var ListView = (function (_super) {
     __extends(ListView, _super);
     function ListView() {
@@ -114,10 +134,17 @@ var ListView = (function (_super) {
         var dataSource = DataSource.new().initWithOwner(this);
         this._dataSource = dataSource;
         this._ios.dataSource = this._dataSource;
-        this._uiTableViewDelegate = UITableViewDelegateImpl.new().initWithOwner(this);
-        this._ios.delegate = this._uiTableViewDelegate;
+        this._delegate = UITableViewDelegateImpl.new().initWithOwner(this);
         this._heights = new Array();
     }
+    ListView.prototype.onLoaded = function () {
+        _super.prototype.onLoaded.call(this);
+        this._ios.delegate = this._delegate;
+    };
+    ListView.prototype.onUnloaded = function () {
+        this._ios.delegate = null;
+        _super.prototype.onUnloaded.call(this);
+    };
     Object.defineProperty(ListView.prototype, "ios", {
         get: function () {
             return this._ios;
@@ -127,6 +154,7 @@ var ListView = (function (_super) {
     });
     ListView.prototype.refresh = function () {
         this._ios.reloadData();
+        this.requestLayout();
     };
     ListView.prototype.getHeight = function (index) {
         return this._heights[index];
@@ -158,18 +186,18 @@ var ListView = (function (_super) {
     };
     ListView.prototype._prepareCell = function (tableCell, indexPath) {
         var cell = tableCell;
-        if (!cell.view) {
-            cell.view = this._getItemTemplateContent(indexPath.row);
-        }
-        var args = notifyForItemAtIndex(this, cell, ITEMLOADING, indexPath);
-        var view = cell.view = args.view || this._getDefaultItemContent(indexPath.row);
-        if (view && !view.parent && view.ios) {
-            cell.contentView.addSubview(view.ios);
-            this._addView(view);
-        }
         var cellHeight;
         try {
             this._preparingCell = true;
+            if (!cell.view) {
+                cell.view = this._getItemTemplateContent(indexPath.row);
+            }
+            var args = notifyForItemAtIndex(this, cell, ITEMLOADING, indexPath);
+            var view = cell.view = args.view || this._getDefaultItemContent(indexPath.row);
+            if (view && !view.parent && view.ios) {
+                cell.contentView.addSubview(view.ios);
+                this._addView(view);
+            }
             this._prepareItem(view, indexPath.row);
             cellHeight = this._layoutCell(view, indexPath);
         }

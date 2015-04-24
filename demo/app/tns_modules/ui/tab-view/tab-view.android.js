@@ -6,6 +6,7 @@ var __extends = this.__extends || function (d, b) {
 };
 var common = require("ui/tab-view/tab-view-common");
 var trace = require("trace");
+var imageSource = require("image-source");
 var VIEWS_STATES = "_viewStates";
 require("utils/module-merge").merge(common, exports);
 var ViewPagerClass = (function (_super) {
@@ -109,6 +110,7 @@ var TabView = (function (_super) {
         this._listenersSuspended = false;
         this._tabsAddedByMe = new Array();
         this._tabsCache = {};
+        this._iconsCache = {};
         var that = new WeakRef(this);
         this._tabListener = new android.app.ActionBar.TabListener({
             get owner() {
@@ -202,6 +204,7 @@ var TabView = (function (_super) {
         _super.prototype.onLoaded.call(this);
         if (this.android && this.android.isShown()) {
             this._addTabsIfNeeded();
+            this._setNativeSelectedIndex(this.selectedIndex);
         }
     };
     TabView.prototype.onUnloaded = function () {
@@ -269,10 +272,28 @@ var TabView = (function (_super) {
             item = newItems[i];
             tab = actionBar.newTab();
             tab.setText(item.title);
+            this._setIcon(item.iconSource, tab);
             tab.setTabListener(this._tabListener);
             actionBar.addTab(tab);
             this._tabsCache[tab.hashCode()] = i;
             this._tabsAddedByMe.push(tab);
+        }
+    };
+    TabView.prototype._setIcon = function (iconSource, tab) {
+        if (!iconSource) {
+            return;
+        }
+        var drawable;
+        drawable = this._iconsCache[iconSource];
+        if (!drawable) {
+            var is = imageSource.fromFileOrResource(iconSource);
+            if (is) {
+                drawable = new android.graphics.drawable.BitmapDrawable(is.android);
+                this._iconsCache[iconSource] = drawable;
+            }
+        }
+        if (drawable) {
+            tab.setIcon(drawable);
         }
     };
     TabView.prototype._removeTabs = function (oldItems) {
@@ -318,11 +339,13 @@ var TabView = (function (_super) {
         if (actionBar) {
             var actionBarSelectedIndex = actionBar.getSelectedNavigationIndex();
             if (actionBarSelectedIndex !== index) {
+                trace.write("TabView actionBar.setSelectedNavigationItem(" + index + ")", common.traceCategory);
                 actionBar.setSelectedNavigationItem(index);
             }
         }
         var viewPagerSelectedIndex = this._android.getCurrentItem();
         if (viewPagerSelectedIndex !== index) {
+            trace.write("TabView this._android.setCurrentItem(" + index + ", true);", common.traceCategory);
             this._android.setCurrentItem(index, true);
         }
     };

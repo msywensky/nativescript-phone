@@ -53,9 +53,16 @@ var Path = require("js-libs/polymer-expressions/path-parser").Path;
             if (!this.valueFn_) {
                 var name = this.name;
                 var path = this.path;
-                this.valueFn_ = function (model, observer) {
+                this.valueFn_ = function (model, observer, changedModel) {
                     if (observer)
                         observer.addPath(model, path);
+
+                    if (changedModel) {
+                        var result = path.getValueFrom(changedModel);
+                        if (result !== undefined) {
+                            return result;
+                        }
+                    }
 
                     return path.getValueFrom(model);
                 }
@@ -65,8 +72,9 @@ var Path = require("js-libs/polymer-expressions/path-parser").Path;
         },
 
         setValue: function (model, newValue) {
-            if (this.path.length == 1);
-            model = findScope(model, this.path[0]);
+            if (this.path.length == 1) {
+                model = findScope(model, this.path[0]);
+            }
 
             return this.path.setValueFrom(model, newValue);
         }
@@ -185,8 +193,8 @@ var Path = require("js-libs/polymer-expressions/path-parser").Path;
             // object.
             if (toModelDirection) {
                 fn = fn.toModel;
-            } else if (typeof fn.toDOM == 'function') {
-                fn = fn.toDOM;
+            } else if (typeof fn.toView == 'function') {
+                fn = fn.toView;
             }
 
             if (typeof fn != 'function') {
@@ -394,11 +402,10 @@ var Path = require("js-libs/polymer-expressions/path-parser").Path;
     }
 
     Expression.prototype = {
-        getValue: function (model, observer, filterRegistry) {
-            var value = getFn(this.expression)(model, observer, filterRegistry);
+        getValue: function (model, isBackConvert, changedModel, observer) {
+            var value = getFn(this.expression)(model.context, observer, changedModel);
             for (var i = 0; i < this.filters.length; i++) {
-                value = this.filters[i].transform(model, observer, filterRegistry,
-                    false, [value]);
+                value = this.filters[i].transform(model.context, observer, model.resources, isBackConvert, [value]);
             }
 
             return value;

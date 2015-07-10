@@ -16,8 +16,8 @@ function dial(telNum,prompt) {
 		return true;
 
 	} catch(ex) {
-		alert("Unable to dial");
-		console.log("phone.dial failed: " + ex);
+		//alert("Unable to dial");
+		//console.log("phone.dial failed: " + ex);
 		return false;
 	}
 }
@@ -31,8 +31,8 @@ function sms(smsNum, messageText) {
 		return true;
 
 	} catch(ex) {
-		alert("Unable to open sms");
-		console.log("phone.sms failed: " + ex);
+		//alert("Unable to open sms");
+		//console.log("phone.sms failed: " + ex);
 		return false;
 	}
 }

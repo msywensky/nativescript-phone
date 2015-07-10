@@ -13,7 +13,7 @@ function dial(telNum,prompt) {
 		a.openURL(url);
 		return true;
 	} else {
-		alert("Unable to dial");
+		//alert("Unable to dial");
 		return false;
 	}
 
@@ -29,8 +29,8 @@ function sms(smsNum, messageText) {
 		a.openURL(url);
 		return true;
 	} else {
-		alert("Unable to open sms");
-		console.log("phone.sms failed");
+		//alert("Unable to open sms");
+		//console.log("phone.sms failed");
 		return false;
 	}
 

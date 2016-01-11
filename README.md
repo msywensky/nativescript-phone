@@ -86,3 +86,22 @@ This method is probably a better choice, even for single recipients if you want 
 var phone = require( "nativescript-phone" );
 phone.groupMessage("212-555-1234", "My message");
 ```
+
+This method also supports a promise. Use as so to define actions after the user has either canceled or sent the message.
+
+```js
+    phone.groupMessage(["905-555-5555", "905-555-4444"], "this is body").then(function(args){
+        console.log(args.response); 
+        // either a string saying cancelled or sent
+        console.log(args.message); 
+        // just a string with more detail than response.
+        
+        /* you can do stuff here.. this happens back 
+        in your app after the message window has 
+        been dismissed */        
+        
+    }, function (e) {
+        console.log("Error occurred " + e); 
+        // e will show a vague error message.
+    });    
+```

@@ -87,7 +87,7 @@ var phone = require( "nativescript-phone" );
 phone.groupMessage("212-555-1234", "My message");
 ```
 
-This method also supports a promise. Use as so to define actions after the user has either canceled or sent the message.
+This method also returns a promise. Use as so to define actions after the user has either canceled or sent the message.
 
 ```js
     phone.groupMessage(["905-555-5555", "905-555-4444"], "this is body").then(function(args){

@@ -37,5 +37,10 @@ function sms(smsNum, messageText) {
 	}
 }
 
+function groupMessage(numbers, message){
+    console.log("Not yet implemented.");
+}
+
+exports.groupMessage = groupMessage;
 exports.dial = dial;
 exports.sms = sms;

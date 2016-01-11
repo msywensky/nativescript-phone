@@ -1,8 +1,8 @@
 {
   "name": "nativescript-phone",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A phone NativeScript module for Android and iOS",
-  "main": "phone-common.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/msywensky/nativescript-phone.git"
@@ -10,6 +10,13 @@
   "keywords": [
     "NativeScript"
   ],
+  "contributors": [
+    {
+      "name": "Ryan Lebel",
+      "email": "ryan@firescript.ca",
+      "url": "https://github.com/firescript"
+    }
+  ],  
   "author": "Mike Sywensky <michael.sywensky@gmail.com> ",
   "license": {
     "type": "MIT",

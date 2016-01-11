@@ -44,7 +44,7 @@ To dial the phone without user interaction on Android your app must request perm
 To use the phone module you must first `require()` it from your project's `node_modules` directory:
 
 ```js
-var phone = require( "./node_modules/nativescript-phone/phone" );
+var phone = require( "nativescript-phone" );
 ```
 
 After you have a reference to the module you can then call the available methods.
@@ -59,7 +59,7 @@ For example, the code below dials the number without showing the device specific
 
 ```js
 // my-page.js
-var phone = require( "/path/to/node_modules/nativescript-phone" );
+var phone = require( "nativescript-phone" );
 phone.dial("212-555-1234",false);
 ```
 #### sms: open the OS specific SMS app
@@ -71,6 +71,18 @@ For example, the code below opens the sms app for the provided number:
 
 ```js
 // my-page.js
-var phone = require( "/path/to/node_modules/nativescript-phone" );
-phone.sms("212-555-1234","My message");
+var phone = require( "nativescript-phone" );
+phone.sms("212-555-1234");
+```
+
+####groupMessage: open an SMS group chat - (Currently only supported on iOS)
+This method is probably a better choice, even for single recipients if you want to define a message body.
+##### Parameters
+* numbers: An array of phone number strings. Supports just one or multiple.
+* message: The body message that is being sent to group.
+
+```js
+// my-page.js
+var phone = require( "nativescript-phone" );
+phone.groupMessage("212-555-1234", "My message");
 ```

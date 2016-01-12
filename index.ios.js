@@ -37,7 +37,7 @@ function sms(smsNum, messageText) {
 
 }
 
-function groupMessage(numbers, message) {
+function groupMessage(numbers, message, subject) {
     
     return new Promise(function (resolve, reject) {  
         
@@ -49,20 +49,25 @@ function groupMessage(numbers, message) {
                     messageComposeViewControllerDidFinishWithResult: function(controller, result) {
                         
                         controller.dismissModalViewControllerAnimated(true);
+                        
+                        console.log(result);
 
                             if(result == MessageComposeResultCancelled) {
+                                console.log("Message Cancelled.");
                                 resolve({
                                     response: "canceled",
                                     message: "User cancelled the message."
                                 });
                             }
                             else if(result == MessageComposeResultSent) {
+                                console.log("Message Sent.");
                                 resolve({
                                     response: "sent",
                                     message: "Message sent."
                                 });
                             }
                             else {
+                                console.log("Something Failed.");
                                 reject(Error("Message send failed."));
                             }
                         
@@ -78,6 +83,9 @@ function groupMessage(numbers, message) {
                 if(message){
                     controller.body = message;   
                 }           
+                if(subject){
+                    controller.subject = subject;   
+                }                
                 
                 controller.messageComposeDelegate = CustomMessageCompositeViewControllerDelegate.alloc().init();           
                 var page = frameModule.topmost().ios.controller;

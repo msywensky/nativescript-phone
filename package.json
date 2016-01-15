@@ -19,6 +19,10 @@
     "url": "https://github.com/msywensky/nativescript-phone/issues"
   },
   "homepage": "https://github.com/msywensky/nativescript-phone",
-  "nativescript": { }
-
+  "nativescript": {
+    "platforms": {
+      "android": "1.0.0",
+      "ios": "1.0.0"
+    }
+  }
 }

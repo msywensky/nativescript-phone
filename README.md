@@ -4,32 +4,11 @@ A NativeScript module providing phone actions for Android and iOS.
 
 ## Installation
 
-Run `npm install nativescript-phone --save` from your project's `app` directory:
+Install the plugin using the NativeScript CLI tooling
 
 ```
-.
-├── app  <------------------------------ run npm install from here
-│   ├── App_Resources
-│   │   ├── android
-│   │   └── ios
-│   ├── app.css
-│   ├── app.js
-│   ├── main-page.js
-│   ├── main-page.xml
-│   ├── node_modules
-│   │   └── nativescript-phone <-- The install will place the module's code here
-│   │       └── ...
-│   └── package.json <----------------- The install will register “nativescript-phone” as a dependency here
-│   └── tns_modules
-│       └── ...
-└── platforms
-    ├── android
-    └── ios
+tns plugin add nativescript-phone
 ```
-
-As is, using npm within NativeScript is still experimental, so it's possible that you'll run into some issues. A more complete solution is in the works, and you can check out [this issue](https://github.com/NativeScript/nativescript-cli/issues/362) for an update on its progress and to offer feedback.
-
-If npm doesn't end up working for you, you can just copy and paste this repo's phone-common.js, phone.android.js, and phone.ios.js files into your app and reference them directly.
 
 ### Android
 
@@ -44,7 +23,7 @@ To dial the phone without user interaction on Android your app must request perm
 To use the phone module you must first `require()` it from your project's `node_modules` directory:
 
 ```js
-var phone = require( "./node_modules/nativescript-phone/phone" );
+var phone = require( "nativescript-phone/phone" );
 ```
 
 After you have a reference to the module you can then call the available methods.
@@ -59,7 +38,7 @@ For example, the code below dials the number without showing the device specific
 
 ```js
 // my-page.js
-var phone = require( "/path/to/node_modules/nativescript-phone" );
+var phone = require( "nativescript-phone" );
 phone.dial("212-555-1234",false);
 ```
 #### sms: open the OS specific SMS app
@@ -71,6 +50,6 @@ For example, the code below opens the sms app for the provided number:
 
 ```js
 // my-page.js
-var phone = require( "/path/to/node_modules/nativescript-phone" );
+var phone = require( "nativescript-phone" );
 phone.sms("212-555-1234","My message");
 ```

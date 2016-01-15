@@ -1,28 +1,28 @@
 {
-  "name": "nativescript-phone",
-  "version": "1.0.0",
-  "description": "A phone NativeScript module for Android and iOS",
-  "main": "phone-common.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/msywensky/nativescript-phone.git"
-  },
-  "keywords": [
-    "NativeScript"
-  ],
-  "author": "Mike Sywensky <michael.sywensky@gmail.com> ",
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/msywensky/nativescript-phone/blob/master/LICENSE"
-  },
-  "bugs": {
-    "url": "https://github.com/msywensky/nativescript-phone/issues"
-  },
-  "homepage": "https://github.com/msywensky/nativescript-phone",
-  "nativescript": {
-    "platforms": {
-      "android": "1.0.0",
-      "ios": "1.0.0"
-    }
-  }
+	"name": "nativescript-phone",
+	"version": "1.0.0",
+	"description": "A phone NativeScript module for Android and iOS",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/msywensky/nativescript-phone.git"
+	},
+	"keywords": [
+		"NativeScript"
+	],
+	"author": "Mike Sywensky <michael.sywensky@gmail.com> ",
+	"license": {
+		"type": "MIT",
+		"url": "https://github.com/msywensky/nativescript-phone/blob/master/LICENSE"
+	},
+	"bugs": {
+		"url": "https://github.com/msywensky/nativescript-phone/issues"
+	},
+	"homepage": "https://github.com/msywensky/nativescript-phone",
+	"nativescript": {
+		"platforms": {
+			"android": "1.0.0",
+			"ios": "1.0.0"
+		}
+	}
 }

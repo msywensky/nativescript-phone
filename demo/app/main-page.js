@@ -1,5 +1,5 @@
 var observable = require("data/observable");
-var phone = require("./node_modules/nativescript-phone/phone");
+var phone = require("nativescript-phone");
 
 var vm = new observable.Observable();
 

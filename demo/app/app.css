@@ -1,15 +1,16 @@
-label {
+﻿.title {
     font-size: 30;
     horizontal-align: center;
-    margin:20;
+    margin: 20;
 }
 
 button {
-    font-size: 30;
+    font-size: 42;
     horizontal-align: center;
 }
 
-textfield {
+.message {
+    font-size: 20;
+    color: #284848;
     horizontal-align: center;
-    font-size: 30;
 }

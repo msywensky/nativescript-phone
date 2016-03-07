@@ -1,3 +1,38 @@
+var frameModule = require("ui/frame");
+
+var CustomMFMessageComposeViewControllerDelegate = NSObject.extend({    
+    initWithResolveReject: function(resolve, reject) {
+        var self = this.super.init();
+        if(self) {
+            this.resolve = resolve;
+            this.reject = reject;
+        }
+        return self;
+    },
+    messageComposeViewControllerDidFinishWithResult: function(controller, result){
+        controller.dismissModalViewControllerAnimated(true);
+        
+        if(result === MessageComposeResultCancelled){
+            this.resolve({
+                response:"cancelled"
+            });
+        }
+        else if(result === MessageComposeResultSent){
+            this.resolve({
+                response:"success"
+            });
+        }
+        else{
+            this.resolve({
+                response:"failed"
+            });
+        }
+        CFRelease(controller.messageComposeDelegate);
+    }
+}, {
+    name: "CustomMFMessageComposeViewControllerDelegate",
+    protocols: [MFMessageComposeViewControllerDelegate]
+});
 
 function dial(telNum,prompt) {
 	var sURL = "tel://";
@@ -20,20 +55,27 @@ function dial(telNum,prompt) {
 }
 
 function sms(smsNum, messageText) {
-	var sURL = "sms:" + smsNum;
-
-	var url = NSURL.URLWithString(sURL);
-	var a = UIApplication.sharedApplication();
-
-	if (a.canOpenURL(url)) {
-		a.openURL(url);
-		return true;
-	} else {
-		//alert("Unable to open sms");
-		//console.log("phone.sms failed");
-		return false;
-	}
-
+    return new Promise(function (resolve, reject){
+        if(!smsNum instanceof Array){
+            reject("Numbers are not in an array!");
+        }
+        
+        var page = frameModule.topmost().ios.controller;
+        var controller = MFMessageComposeViewController.alloc().init();
+        var delegate = CustomMFMessageComposeViewControllerDelegate.alloc().initWithResolveReject(resolve, reject);
+        
+        CFRetain(delegate);
+        controller.messageComposeDelegate = delegate;
+        
+        if(MFMessageComposeViewController.canSendText()){
+            controller.body = messageText;
+            controller.recipients = smsNum;
+            page.presentModalViewControllerAnimated(controller, true);
+        }
+        else{
+            reject("Cannot Send SMS!");
+        }
+    });
 }
 
 exports.dial = dial;

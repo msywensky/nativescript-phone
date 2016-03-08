@@ -29,15 +29,41 @@ function sms(smsNum, messageText) {
         }
         
     	try {
+            var SEND_SMS = 1001;
     		var intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
             intent.putExtra("address", smsNum.join(";"));
     		intent.putExtra("sms_body", messageText);
             intent.setType("vnd.android-dir/mms-sms");
-    		application.android.foregroundActivity.startActivity(intent);
-            resolve({
-                response:"success"
-            });
-
+            
+            var previousResult = application.android.onActivityResult;
+            application.android.onActivityResult = function(requestCode, resultCode, data) {
+                switch (requestCode) {
+                     case SEND_SMS:
+                        application.android.onActivityResult = previousResult;
+                        if (resultCode === android.app.Activity.RESULT_OK){
+                            return resolve({
+                                response:"success"
+                            });
+                        }
+                        else if (resultCode === android.app.Activity.RESULT_CANCELED){
+                            return resolve({
+                                response:"cancelled"
+                            });
+                        }
+                        else {
+                            return resolve({
+                                response:"failed"
+                            });
+                        }
+                        break;
+                    default:
+                        if (typeof previousResult === 'function') {
+                            previousResult(requestCode, resultCode, data);
+                        }
+                        break;
+                }
+            };
+            application.android.foregroundActivity.startActivityForResult(intent, SEND_SMS);
     	} catch(ex) {
             reject(ex);
     	}

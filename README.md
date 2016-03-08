@@ -43,13 +43,21 @@ phone.dial("212-555-1234",false);
 ```
 #### sms: open the OS specific SMS app
 ##### Parameters
-* smsNum: SMS number to use.
-* messageText: String to send. - Not supported on iOS at this time.
+* smsNum: SMS numbers to use.
+* messageText: String to send.
 
 For example, the code below opens the sms app for the provided number:
 
 ```js
 // my-page.js
 var phone = require( "nativescript-phone" );
-phone.sms("212-555-1234","My message");
+phone.sms(["212-555-1234","212-555-1245"],"My Message")
+.then(function(args){
+        /// args.reponse: "success", "cancelled", "failed"
+        console.log(JSON.stringify(args));
+    },
+    function(err){
+        console.log("Error: " + err);
+    }
+);
 ```

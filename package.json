@@ -1,6 +1,6 @@
 {
 	"name": "nativescript-phone",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "A phone NativeScript module for Android and iOS",
 	"main": "index.js",
 	"repository": {

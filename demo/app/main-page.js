@@ -17,8 +17,16 @@ function callNumber() {
 }
 
 function textNumber() {
-  var number = vm.get("number");
-  phone.sms(number,"testing");
+    var number = vm.get("number");
+    phone.sms([number],"testing")
+    .then(function(args){
+            /// args.reponse: "success", "cancelled", "failed"
+            console.log(JSON.stringify(args));
+        },
+        function(err){
+            console.log("Error: " + err);
+        }
+    );
 }
 
 exports.pageLoaded = pageLoaded;

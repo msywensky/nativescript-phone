@@ -24,8 +24,8 @@ function dial(telNum,prompt) {
 
 function sms(smsNum, messageText) {
     return new Promise(function (resolve, reject){
-        if(!smsNum instanceof Array){
-            reject("Numbers are not in an array!");
+        if(!Array.isArray(smsNum)){
+            smsNum = [smsNum];
         }
         
     	try {
@@ -65,7 +65,7 @@ function sms(smsNum, messageText) {
             };
             application.android.foregroundActivity.startActivityForResult(intent, SEND_SMS);
     	} catch(ex) {
-            reject(ex);
+            reject(ex.toString());
     	}
     });
 }

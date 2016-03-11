@@ -56,8 +56,8 @@ function dial(telNum,prompt) {
 
 function sms(smsNum, messageText) {
     return new Promise(function (resolve, reject){
-        if(!smsNum instanceof Array){
-            reject("Numbers are not in an array!");
+        if(!Array.isArray(smsNum)){
+            smsNum = [smsNum];
         }
         
         var page = frameModule.topmost().ios.controller;

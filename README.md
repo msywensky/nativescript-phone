@@ -18,6 +18,18 @@ To dial the phone without user interaction on Android your app must request perm
 <uses-permission android:name="android.permission.CALL_PHONE" />
 ```
 
+### IOS 
+
+You must add the following line to your project's Info.plist
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+   <string>tel</string>
+   <string>telprompt</string>
+</array>
+```
+
 ## Usage
 
 To use the phone module you must first `require()` it from your project's `node_modules` directory:

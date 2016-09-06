@@ -3,6 +3,7 @@
 	"version": "1.1.0",
 	"description": "A phone NativeScript module for Android and iOS",
 	"main": "index.js",
+	"typings": "index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/msywensky/nativescript-phone.git"
@@ -11,6 +12,13 @@
 		"NativeScript"
 	],
 	"author": "Mike Sywensky <michael.sywensky@gmail.com> ",
+	"contributors": [
+		{
+			"name": "Brad Martin",
+			"email": " bradwaynemartin@gmail.com",
+			"url": "https://github.com/bradmartin"
+		}
+	],
 	"license": {
 		"type": "MIT",
 		"url": "https://github.com/msywensky/nativescript-phone/blob/master/LICENSE"

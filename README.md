@@ -91,3 +91,28 @@ phone.sms(["212-555-1234","212-555-1245"],"My Message")
     }
 );
 ```
+
+
+### TypeScript example
+
+```TypeScript
+
+import * as TNSPhone from 'nativescript-phone';
+
+/// Dial a phone number.
+public callHome() {
+    TNSPhone.dial('415-123-4567', false);
+}
+
+// Text a number (or multiple numbers)
+public messageParents() {
+    TNSPhone.sms(['212-555-1234', '212-555-0987'], "Text till your fingers bleed")
+        .then((args) => {
+            console.log(JSON.stringify(args));
+        }, (err) => {
+            console.log('Error: ' + err);
+        })
+}
+
+
+```

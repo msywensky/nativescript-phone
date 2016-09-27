@@ -10,6 +10,9 @@ function dial(telNum,prompt) {
 
 		var intent = new android.content.Intent(intentType);
 
+                //support for ussd numbers with # on android
+                telNum = telNum.replace('#', encodeURIComponent('#'));
+
 		intent.setData(android.net.Uri.parse("tel:" + telNum));
 
 		application.android.foregroundActivity.startActivity(intent);

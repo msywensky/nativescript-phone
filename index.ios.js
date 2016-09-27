@@ -35,22 +35,21 @@ var CustomMFMessageComposeViewControllerDelegate = NSObject.extend({
 });
 
 function dial(telNum,prompt) {
-	var sURL = "tel://";
+    var sURL = "tel://";
 
-	if (prompt) {
-		sURL = "telprompt:";
-	}
+    if (prompt) {
+        sURL = "telprompt:";
+    }
 
-	var url = NSURL.URLWithString(sURL + telNum);
-	var a = UIApplication.sharedApplication();
+    var url = NSURL.URLWithString(sURL + telNum);
 
-	if (a.canOpenURL(url)) {
-		a.openURL(url);
-		return true;
-	} else {
-		//alert("Unable to dial");
-		return false;
-	}
+    if (utils.ios.getter(UIApplication, UIApplication.sharedApplication).canOpenURL(url)) {
+        utils.ios.getter(UIApplication, UIApplication.sharedApplication).openURL(url);
+        return true;
+    } else {
+        //alert("Unable to dial");
+        return false;
+    }
 
 }
 

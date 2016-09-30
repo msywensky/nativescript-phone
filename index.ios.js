@@ -42,10 +42,9 @@ function dial(telNum,prompt) {
 	}
 
 	var url = NSURL.URLWithString(sURL + telNum);
-	var a = UIApplication.sharedApplication();
 
-	if (a.canOpenURL(url)) {
-		a.openURL(url);
+	if(utils.ios.getter(UIApplication, UIApplication.sharedApplication).canOpenURL(url)){
+		utils.ios.getter(UIApplication, UIApplication.sharedApplication).openURL(url);
 		return true;
 	} else {
 		//alert("Unable to dial");

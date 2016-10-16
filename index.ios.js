@@ -1,4 +1,5 @@
 var frameModule = require("ui/frame");
+var utils = require("utils/utils");
 
 var CustomMFMessageComposeViewControllerDelegate = NSObject.extend({    
     initWithResolveReject: function(resolve, reject) {
@@ -42,8 +43,7 @@ function dial(telNum,prompt) {
 	}
 
 	var url = NSURL.URLWithString(sURL + telNum);
-	var a = UIApplication.sharedApplication();
-
+	var a = utils.ios.getter(UIApplication, UIApplication.sharedApplication);
 	if (a.canOpenURL(url)) {
 		a.openURL(url);
 		return true;

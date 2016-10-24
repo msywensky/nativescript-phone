@@ -1,7 +1,7 @@
 {
 	"name": "nativescript-phone",
-	"version": "1.2.0",
-	"description": "A phone NativeScript module for Android and iOS",
+	"version": "1.2.1",
+	"description": "NativeScript plugin to use the device phone and SMS features for Android and iOS",
 	"main": "index.js",
 	"typings": "index.d.ts",
 	"repository": {
@@ -9,16 +9,16 @@
 		"url": "https://github.com/msywensky/nativescript-phone.git"
 	},
 	"keywords": [
-		"NativeScript"
+		"NativeScript",
+		"Phone",
+		"SMS"
 	],
 	"author": "Mike Sywensky <michael.sywensky@gmail.com> ",
-	"contributors": [
-		{
-			"name": "Brad Martin",
-			"email": " bradwaynemartin@gmail.com",
-			"url": "https://github.com/bradmartin"
-		}
-	],
+	"contributors": [{
+		"name": "Brad Martin",
+		"email": " bradwaynemartin@gmail.com",
+		"url": "https://github.com/bradmartin"
+	}],
 	"license": {
 		"type": "MIT",
 		"url": "https://github.com/msywensky/nativescript-phone/blob/master/LICENSE"

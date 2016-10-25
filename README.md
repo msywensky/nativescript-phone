@@ -1,6 +1,13 @@
+[![npm](https://img.shields.io/npm/v/nativescript-phone.svg)](https://www.npmjs.com/package/nativescript-phone)
+[![npm](https://img.shields.io/npm/dt/nativescript-phone.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-phone)
+
 # NativeScript Phone
 
-A NativeScript module providing phone actions for Android and iOS.
+NativeScript plugin to use the device phone and SMS features for Android and iOS
+
+### Native Info
+- Android uses an Intent with [ACTION_CALL](https://developer.android.com/reference/android/content/Intent.html#ACTION_CALL) for phone calls & [ACTION_VIEW](https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW) for SMS.
+- iOS uses the [telprompt](https://developer.apple.com/library/content/featuredarticles/iPhoneURLScheme_Reference/PhoneLinks/PhoneLinks.html) for phone calls & [MFMessageComposeViewController](https://developer.apple.com/reference/messageui/mfmessagecomposeviewcontroller) for SMS.
 
 ## Installation
 

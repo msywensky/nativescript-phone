@@ -33,10 +33,11 @@ function sms(smsNum, messageText) {
 
         try {
             var SEND_SMS = 1001;
-            var intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
-            intent.putExtra("address", smsNum.join(";"));
+            var intent = new android.content.Intent(android.content.Intent.ACTION_SENDTO);
+            intent.addCategory(android.content.Intent.CATEGORY_DEFAULT);
             intent.putExtra("sms_body", messageText);
             intent.setType("vnd.android-dir/mms-sms");
+            intent.setData(android.net.Uri.parse("sms:" + smsNum.join(";")));
 
             var previousResult = application.android.onActivityResult;
             application.android.onActivityResult = function (requestCode, resultCode, data) {

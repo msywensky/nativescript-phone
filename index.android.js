@@ -19,7 +19,6 @@ function dial(telNum, prompt) {
         return true;
 
     } catch (ex) {
-        //alert("Unable to dial");
         //console.log("phone.dial failed: " + ex);
         return false;
     }

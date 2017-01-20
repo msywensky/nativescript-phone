@@ -19,7 +19,7 @@ tns plugin add nativescript-phone
 
 ### Android
 
-To dial the phone without user interaction on Android your app must request permission to dial. To do so, add the following line to your project's AndroidManifest.xml:
+To dial the phone without user interaction on Android your app must request permission to dial. The following must be in your app's AndroidManifest.xml. The plugin should add this for you if it does not exist already.
 
 ```xml
 <uses-permission android:name="android.permission.CALL_PHONE" />

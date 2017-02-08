@@ -2,8 +2,9 @@
  * Initiate a phone call.
  * @param {string} number - The number to dial.
  * @param {boolean} confirm - To enable OS specific confirmation before dialing.
+ * @returns {boolean} Result of dial
  */
-export function dial(number: string, confirm: boolean): void;
+export function dial(number: string, confirm: boolean): boolean;
 
 
 /**

@@ -17,6 +17,9 @@ Install the plugin using the NativeScript CLI tooling
 tns plugin add nativescript-phone
 ```
 
+## Video Tutorial
+[egghead plugin lesson](https://egghead.io/lessons/javascript-using-the-device-phone-and-sms-with-nativescript)
+
 ### Android
 
 To dial the phone without user interaction on Android your app must request permission to dial. The following must be in your app's AndroidManifest.xml. The plugin should add this for you if it does not exist already.

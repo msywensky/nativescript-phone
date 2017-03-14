@@ -18,7 +18,7 @@ tns plugin add nativescript-phone
 ```
 
 ## Video Tutorial
-[egghead plugin lesson](https://egghead.io/lessons/javascript-using-the-device-phone-and-sms-with-nativescript)
+[egghead plugin lesson @ https://egghead.io/lessons/javascript-using-the-device-phone-and-sms-with-nativescript](https://egghead.io/lessons/javascript-using-the-device-phone-and-sms-with-nativescript)
 
 ### Android
 

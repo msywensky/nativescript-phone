@@ -1,8 +1,13 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
+<Page 
+  xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
     <Label text="Enter Number" cssClass="title"/>
     <TextField width="200" text="{{ number }}" id="number" hint="phone/text number" />
-    <Button text="Call Number" tap="callNumber" />
-    <Button text="Text Number" tap="textNumber" />
+    <Button text="Call Number" tap="callNumber" class="btn btn-primary" />
+    <Button text="Call without Prompt" tap="callNumberWithoutPrompt" class="btn btn-outline" />
+    <Button text="Text Number" tap="textNumber" class="btn btn-primary" />
+    <android>
+      <Button text="Request  Android Call Permisson" tap="requestAndroidPerm" class="btn btn-outline" />
+    </android>
   </StackLayout>
 </Page>

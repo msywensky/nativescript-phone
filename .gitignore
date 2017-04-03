@@ -1,3 +1,7 @@
-demo
-!demo/app
+demo/hooks
+demo/node_modules/
+demo/platforms/
 node_modules/
+
+*.log
+

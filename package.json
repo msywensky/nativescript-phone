@@ -13,12 +13,17 @@
 		"Phone",
 		"SMS"
 	],
+	"dependencies": {
+		"nativescript-permissions": "1.2.3"
+	},
 	"author": "Mike Sywensky <michael.sywensky@gmail.com> ",
-	"contributors": [{
-		"name": "Brad Martin",
-		"email": " bradwaynemartin@gmail.com",
-		"url": "https://github.com/bradmartin"
-	}],
+	"contributors": [
+		{
+			"name": "Brad Martin",
+			"email": " bradwaynemartin@gmail.com",
+			"url": "https://github.com/bradmartin"
+		}
+	],
 	"license": {
 		"type": "MIT",
 		"url": "https://github.com/msywensky/nativescript-phone/blob/master/LICENSE"

@@ -102,6 +102,11 @@ phone.sms(["212-555-1234","212-555-1245"],"My Message")
 );
 ```
 
+#### requestCallPermission: Request Android Call_Phone Permission
+#### Parameters
+* explanationText: The explanation text if the user denies permission twice.
+If you attempt to use `dial("122929912", false)` to not prompt on android 6.0 nothing will happen unless permission has been approved. When this method is executed a check for permissions happens, if no permissions it returns a string as a warning. There is no harm in wrapping your `dial()` inside of the `requestCallPermission()` method.
+
 
 ### TypeScript example
 

@@ -7,7 +7,7 @@ const ContextCompat = android.support.v4.content.ContextCompat;
 const CALL_PHONE = android.Manifest.permission.CALL_PHONE;
 const PERMISSION_GRANTED = android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-function dial(telNum, prompt = true) {
+function dial(telNum, prompt) {
   try {
     var intentType = Intent.ACTION_DIAL;
 

@@ -16,6 +16,13 @@ export function dial(number: string, confirm: boolean): boolean;
 export function sms(numbers: Array<string>, message: string): Promise<response>;
 
 
+/**
+ * Request Call Permission on Android (dummy function on ios).
+ * @param {string} explanation - The explanation text if the user denies permission twice.
+ * @returns {Promise} Permission granted for then, denied for catch.
+ */
+export function requestCallPermission(explanation?: string): Promise<string>;
+
 interface response {
     "success": string,
     "cancelled": string,

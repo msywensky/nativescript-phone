@@ -75,5 +75,12 @@ function sms(smsNum, messageText) {
     });
 }
 
+function requestCallPermission(explanation) {
+    return new Promise(function (resolve) {
+        resolve('N/A');
+    });
+}
+
 exports.dial = dial;
 exports.sms = sms;
+exports.requestCallPermission = requestCallPermission;

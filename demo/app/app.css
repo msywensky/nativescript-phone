@@ -1,16 +1,25 @@
-﻿.title {
-    font-size: 30;
-    horizontal-align: center;
-    margin: 20;
+﻿@import '~nativescript-theme-core/css/core.light.css'; /* nativescript-provided core light theme */
+@import './custom.css'; /* this downloaded theme */
+
+.title {
+  font-size: 30;
+  horizontal-align: center;
+  margin: 20;
+}
+
+textfield {
+  width: 100%;
 }
 
 button {
-    font-size: 18;
-    horizontal-align: center;
+  width: 100%;
+  font-size: 18;
+  horizontal-align: center;
+  padding: 4;
 }
 
 .message {
-    font-size: 20;
-    color: #284848;
-    horizontal-align: center;
+  font-size: 20;
+  color: #284848;
+  horizontal-align: center;
 }

@@ -2,11 +2,14 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-android": {
-      "version": "4.3.0-2018-10-15-135519-01"
+      "version": "4.2.0"
+    },
+    "tns-ios": {
+      "version": "4.2.0"
     }
   },
   "dependencies": {
-    "nativescript-phone": "file:..",
+    "nativescript-phone": "file:../src",
     "nativescript-theme-core": "~1.0.4",
     "tns-core-modules": "^4.2.0"
   },
@@ -15,7 +18,6 @@
     "babel-types": "6.4.5",
     "babylon": "6.4.5",
     "lazy": "1.0.11",
-    "nativescript-dev-android-snapshot": "^0.*.*",
     "typescript": "^3.1.3"
   }
 }

@@ -16,7 +16,13 @@
     "ios"
   ],
   "scripts": {
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "build.native": "node scripts/build-native.js",
+    "demo.ios": "cd ../demo && tns run ios --syncAllFiles",
+    "demo.android": "cd ../demo && tns run android --syncAllFiles",
+    "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
+    "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-phone && cd ../src",
+    "plugin.prepare": "npm run build.native && cd ../demo && tns plugin remove nativescript-phone && tns plugin add ../src"
   },
   "lint-staged": {
     "*.ts, *.js, *.css, *.scss, *.md": [
@@ -31,9 +37,12 @@
     "prettier": "^1.14.3",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
+    "rimraf": "^2.6.2",
     "typescript": "~2.8.2",
     "tns-core-modules": "^4.2.1",
-    "tns-platform-declarations": "^4.2.1"
+    "tns-platform-declarations": "^4.2.1",
+    "semver": "^5.5.0",
+    "prompt": "^1.0.0"
   },
   "author": "Mike Sywensky <michael.sywensky@gmail.com> ",
   "contributors": [
@@ -59,6 +68,9 @@
     "platforms": {
       "android": "1.0.0",
       "ios": "1.0.0"
+    },
+    "tns-ios": {
+      "version": "4.3.0-2018-10-05-115910-01"
     }
   }
 }

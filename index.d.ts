@@ -6,7 +6,6 @@
  */
 export function dial(number: string, confirm: boolean): boolean;
 
-
 /**
  * Open the OS specific SMS app.
  * @param {Array<string>} numbers - The number to send SMS to.
@@ -14,7 +13,6 @@ export function dial(number: string, confirm: boolean): boolean;
  * @returns {Promise} response
  */
 export function sms(numbers: Array<string>, message: string): Promise<response>;
-
 
 /**
  * Request Call Permission on Android (dummy function on ios).
@@ -24,7 +22,7 @@ export function sms(numbers: Array<string>, message: string): Promise<response>;
 export function requestCallPermission(explanation?: string): Promise<string>;
 
 interface response {
-    "success": string,
-    "cancelled": string,
-    "failed": string
+  success: string;
+  cancelled: string;
+  failed: string;
 }

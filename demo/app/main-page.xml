@@ -1,5 +1,4 @@
-<Page 
-  xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
     <Label text="Enter Number" cssClass="title"/>
     <TextField width="200" text="{{ number }}" id="number" hint="phone/text number" />

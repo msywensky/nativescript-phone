@@ -42,3 +42,7 @@ tslint.json
 karma.conf.js
 typings.json
 typedoc.json
+
+
+.prettierrc
+references.d.ts

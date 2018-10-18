@@ -1,3 +1,3 @@
-require("./bundle-config");
-var application = require("application");
-application.start({ moduleName: "main-page" });
+require('./bundle-config');
+var application = require('tns-core-modules/application');
+application.start({ moduleName: 'main-page' });

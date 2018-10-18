@@ -81,21 +81,11 @@ function sms(smsNum, messageText) {
 }
 
 function requestCallPermission(explanation) {
-  if (explanation !== "") {
-    permissions.requestPermission(CALL_PHONE, explanation).then(
-      function(result) {
-        return result;
-      },
-      function(error) {
-        return error;
-      }
-    );
-  }
+    return permissions.requestPermission(CALL_PHONE, explanation);
 }
 
 function hasCallPermission() {
-  var result = permissions.hasPermission(CALL_PHONE);
-  return result;
+  return permissions.hasPermission(CALL_PHONE);
 }
 
 exports.dial = dial;

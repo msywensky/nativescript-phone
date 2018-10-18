@@ -104,8 +104,11 @@ phone.sms(["212-555-1234","212-555-1245"],"My Message")
 
 #### requestCallPermission: Request Android Call_Phone Permission
 #### Parameters
-* explanationText: The explanation text if the user denies permission twice.
-If you attempt to use `dial("122929912", false)` to not prompt on android 6.0 nothing will happen unless permission has been approved. When this method is executed a check for permissions happens, if no permissions it returns a string as a warning. There is no harm in wrapping your `dial()` inside of the `requestCallPermission()` method.
+* explanation: The explanation text if the user denies permission twice (nullable).
+If you attempt to use `dial("122929912", false)` to not prompt on android 6.0, nothing will happen unless permission has been approved before.
+When this method is executed, a check for permissions happens, and a promise is returned.
+If the user refuse it, you can handle it via the `catch` method of promise. If it accepts you can dial in the `then`method.
+You should so "wrap" your `dial` method inside of the `requestCallPermission()` method (see following example).
 
 
 ### TypeScript example
@@ -116,7 +119,10 @@ import * as TNSPhone from 'nativescript-phone';
 
 /// Dial a phone number.
 public callHome() {
-    TNSPhone.dial('415-123-4567', false);
+   const phoneNumber = '415-123-4567';
+   TNSPhone.requestCallPermission('You should accept the permission to be able to make a direct phone call.')
+      .then(() => TNSPhone.dial(phoneNumber, false))
+      .catch(() => TNSPhone.dial(phoneNumber, true));
 }
 
 // Text a number (or multiple numbers)

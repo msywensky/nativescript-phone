@@ -56,10 +56,8 @@
       "url": "https://github.com/witi83"
     }
   ],
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/msywensky/nativescript-phone/blob/master/LICENSE"
-  },
+  "readmeFilename": "README.md",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/msywensky/nativescript-phone/issues"
   },

@@ -1,5 +1,4 @@
 // @ts-check
-
 var phone = require('nativescript-phone');
 var app = require('tns-core-modules/application');
 var observable = require('tns-core-modules/data/observable');
@@ -47,6 +46,12 @@ function textNumber() {
   );
 }
 
+/*
+Exporting a function in a NativeScript code-behind file makes it accessible
+to the file’s corresponding XML file. In this case, exporting the onNavigatingTo
+function here makes the navigatingTo="onNavigatingTo" binding in this page’s XML
+file work.
+*/
 exports.pageLoaded = pageLoaded;
 exports.callNumber = callNumber;
 exports.callNumberWithoutPrompt = callNumberWithoutPrompt;

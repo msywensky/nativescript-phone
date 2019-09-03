@@ -2,8 +2,6 @@
 /// <reference path="./node_modules/tns-platform-declarations/ios.d.ts" />
 
 var frameModule = require('tns-core-modules/ui/frame');
-var utils = require('tns-core-modules/utils/utils');
-
 var CustomMFMessageComposeViewControllerDelegate = NSObject.extend(
   {
     initWithResolveReject: function(resolve, reject) {
@@ -51,14 +49,8 @@ function dial(telNum, prompt) {
 
   var url = NSURL.URLWithString(sURL + telNum);
 
-  if (
-    utils.ios
-      .getter(UIApplication, UIApplication.sharedApplication)
-      .canOpenURL(url)
-  ) {
-    utils.ios
-      .getter(UIApplication, UIApplication.sharedApplication)
-      .openURL(url);
+  if (UIApplication.sharedApplication.canOpenURL(url)) {
+    UIApplication.sharedApplication.openURL(url);
     return true;
   } else {
     //alert("Unable to dial");

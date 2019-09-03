@@ -18,8 +18,8 @@
   "scripts": {
     "precommit": "lint-staged",
     "build.native": "node scripts/build-native.js",
-    "demo.ios": "cd ../demo && tns run ios --syncAllFiles",
-    "demo.android": "cd ../demo && tns run android --syncAllFiles",
+    "demo.ios": "cd ../demo && tns run ios",
+    "demo.android": "cd ../demo && tns run android",
     "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
     "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-phone && cd ../src",
     "plugin.prepare": "npm run build.native && cd ../demo && tns plugin remove nativescript-phone && tns plugin add ../src"

@@ -1,6 +1,6 @@
 {
   "name": "nativescript-phone",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "NativeScript plugin to use the device phone and SMS features for Android and iOS",
   "main": "index",
   "typings": "index.d.ts",
@@ -48,7 +48,6 @@
   "contributors": [
     {
       "name": "Brad Martin",
-      "email": "bradwaynemartin@gmail.com",
       "url": "https://github.com/bradmartin"
     },
     {
@@ -66,9 +65,6 @@
     "platforms": {
       "android": "1.0.0",
       "ios": "1.0.0"
-    },
-    "tns-ios": {
-      "version": "4.3.0-2018-10-05-115910-01"
     }
   }
 }

@@ -59,7 +59,10 @@ function sms(smsNum, messageText) {
       var activity =
         app.android.foregroundActivity || app.android.startActivity;
 
+      var previousResult = activity.onActivityResult; 
+
       activity.onActivityResult = function(requestCode, resultCode, data) {
+        activity.onActivityResult = previousResult;
         // Check which request we're responding to
         if (requestCode === SEND_SMS) {
           if (resultCode === android.app.Activity.RESULT_OK) {
@@ -74,6 +77,10 @@ function sms(smsNum, messageText) {
             return resolve({
               response: 'failed'
             });
+          }
+        } else { // activity result not handled by this plugin 
+          if (typeof previousResult === "function") {
+            previousResult(requestCode, resultCode, data); // pass to previous result handler 
           }
         }
       };

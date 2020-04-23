@@ -1,10 +1,10 @@
 // @ts-check
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" />
 
-const app = require('tns-core-modules/application');
+const app = require('@nativescript/core/application');
 const permissions = require('nativescript-permissions');
 
-function dial(telNum, prompt) {
+export function dial(telNum, prompt) {
   try {
     if (prompt === void 0) {
       prompt = true;
@@ -39,8 +39,8 @@ function dial(telNum, prompt) {
   }
 }
 
-function sms(smsNum, messageText) {
-  return new Promise(function(resolve, reject) {
+export function sms(smsNum, messageText) {
+  return new Promise(function (resolve, reject) {
     if (!Array.isArray(smsNum)) {
       smsNum = [smsNum];
     }
@@ -59,28 +59,29 @@ function sms(smsNum, messageText) {
       var activity =
         app.android.foregroundActivity || app.android.startActivity;
 
-      var previousResult = activity.onActivityResult; 
+      var previousResult = activity.onActivityResult;
 
-      activity.onActivityResult = function(requestCode, resultCode, data) {
+      activity.onActivityResult = function (requestCode, resultCode, data) {
         activity.onActivityResult = previousResult;
         // Check which request we're responding to
         if (requestCode === SEND_SMS) {
           if (resultCode === android.app.Activity.RESULT_OK) {
             return resolve({
-              response: 'success'
+              response: 'success',
             });
           } else if (resultCode === android.app.Activity.RESULT_CANCELED) {
             return resolve({
-              response: 'cancelled'
+              response: 'cancelled',
             });
           } else {
             return resolve({
-              response: 'failed'
+              response: 'failed',
             });
           }
-        } else { // activity result not handled by this plugin 
-          if (typeof previousResult === "function") {
-            previousResult(requestCode, resultCode, data); // pass to previous result handler 
+        } else {
+          // activity result not handled by this plugin
+          if (typeof previousResult === 'function') {
+            previousResult(requestCode, resultCode, data); // pass to previous result handler
           }
         }
       };
@@ -90,7 +91,7 @@ function sms(smsNum, messageText) {
   });
 }
 
-function requestCallPermission(explanation) {
+export function requestCallPermission(explanation) {
   return permissions.requestPermission(
     android.Manifest.permission.CALL_PHONE,
     explanation
@@ -100,7 +101,3 @@ function requestCallPermission(explanation) {
 function hasCallPermission() {
   return permissions.hasPermission(android.Manifest.permission.CALL_PHONE);
 }
-
-exports.dial = dial;
-exports.sms = sms;
-exports.requestCallPermission = requestCallPermission;

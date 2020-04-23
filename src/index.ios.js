@@ -1,10 +1,11 @@
 // @ts-check
 /// <reference path="./node_modules/tns-platform-declarations/ios.d.ts" />
 
-var frameModule = require('tns-core-modules/ui/frame');
+var frameModule = require('@nativescript/core/ui/frame');
+// @ts-ignore
 var CustomMFMessageComposeViewControllerDelegate = NSObject.extend(
   {
-    initWithResolveReject: function(resolve, reject) {
+    initWithResolveReject: function (resolve, reject) {
       var self = this.super.init();
       if (self) {
         this.resolve = resolve;
@@ -12,7 +13,7 @@ var CustomMFMessageComposeViewControllerDelegate = NSObject.extend(
       }
       return self;
     },
-    messageComposeViewControllerDidFinishWithResult: function(
+    messageComposeViewControllerDidFinishWithResult: function (
       controller,
       result
     ) {
@@ -20,27 +21,27 @@ var CustomMFMessageComposeViewControllerDelegate = NSObject.extend(
 
       if (result === MessageComposeResult.Cancelled) {
         this.resolve({
-          response: 'cancelled'
+          response: 'cancelled',
         });
       } else if (result === MessageComposeResult.Sent) {
         this.resolve({
-          response: 'success'
+          response: 'success',
         });
       } else {
         this.resolve({
-          response: 'failed'
+          response: 'failed',
         });
       }
       CFRelease(controller.messageComposeDelegate);
-    }
+    },
   },
   {
     name: 'CustomMFMessageComposeViewControllerDelegate',
-    protocols: [MFMessageComposeViewControllerDelegate]
+    protocols: [MFMessageComposeViewControllerDelegate],
   }
 );
 
-function dial(telNum, prompt) {
+export function dial(telNum, prompt) {
   var sURL = 'tel://';
 
   if (prompt) {
@@ -58,8 +59,8 @@ function dial(telNum, prompt) {
   }
 }
 
-function sms(smsNum, messageText) {
-  return new Promise(function(resolve, reject) {
+export function sms(smsNum, messageText) {
+  return new Promise(function (resolve, reject) {
     if (!Array.isArray(smsNum)) {
       smsNum = [smsNum];
     }
@@ -84,12 +85,8 @@ function sms(smsNum, messageText) {
   });
 }
 
-function requestCallPermission(explanation) {
-  return new Promise(function(resolve) {
+export function requestCallPermission(explanation) {
+  return new Promise(function (resolve) {
     resolve('N/A');
   });
 }
-
-exports.dial = dial;
-exports.sms = sms;
-exports.requestCallPermission = requestCallPermission;

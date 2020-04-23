@@ -6,6 +6,7 @@
 NativeScript plugin to use the device phone and SMS features for Android and iOS
 
 ### Native Info
+
 - Android uses an Intent with [ACTION_CALL](https://developer.android.com/reference/android/content/Intent.html#ACTION_CALL) for phone calls & [ACTION_VIEW](https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW) for SMS.
 - iOS uses the [telprompt](https://developer.apple.com/library/content/featuredarticles/iPhoneURLScheme_Reference/PhoneLinks/PhoneLinks.html) for phone calls & [MFMessageComposeViewController](https://developer.apple.com/reference/messageui/mfmessagecomposeviewcontroller) for SMS.
 
@@ -18,17 +19,18 @@ tns plugin add nativescript-phone
 ```
 
 ## Video Tutorial
+
 [egghead plugin lesson @ https://egghead.io/lessons/javascript-using-the-device-phone-and-sms-with-nativescript](https://egghead.io/lessons/javascript-using-the-device-phone-and-sms-with-nativescript)
 
 ### Android
 
-To dial the phone without user interaction on Android your app must request permission to dial. The following must be in your app's AndroidManifest.xml. The plugin should add this for you if it does not exist already.
+To dial the phone without user interaction on Android your app must request permission to dial. The following must be in your app's AndroidManifest.xml.
 
 ```xml
 <uses-permission android:name="android.permission.CALL_PHONE" />
 ```
 
-### IOS 
+### IOS
 
 You must add the following line to your project's Info.plist
 
@@ -45,28 +47,34 @@ You must add the following line to your project's Info.plist
 To use the phone module you must first `require()` it from your project's `node_modules` directory:
 
 ```js
-var phone = require( "nativescript-phone" );
+var phone = require('nativescript-phone');
 ```
 
 After you have a reference to the module you can then call the available methods.
 
 ### Methods
+
 #### dial: initiate a phone call
+
 ##### Parameters
-* telNum: Phone number to dial.
-* prompt: Boolean to enable OS specific confirmation before dialing.
+
+- telNum: Phone number to dial.
+- prompt: Boolean to enable OS specific confirmation before dialing.
 
 For example, the code below dials the number without showing the device specific confirmation prompt:
 
 ```js
 // my-page.js
-var phone = require( "nativescript-phone" );
-phone.dial("212-555-1234",false);
+var phone = require('nativescript-phone');
+phone.dial('212-555-1234', false);
 ```
+
 #### sms: open the OS specific SMS app
+
 ##### Parameters
-* smsNum: SMS number or numbers to use.
-* messageText: String to send.
+
+- smsNum: SMS number or numbers to use.
+- messageText: String to send.
 
 For example, the code below opens the sms app for the provided number:
 
@@ -74,42 +82,45 @@ Send to one number (provided for backwards compatibility)
 
 ```js
 // my-page.js
-var phone = require( "nativescript-phone" );
-phone.sms("212-555-1234","My Message") //New Method for single number is phone.sms(["212-555-1234"],"My Message")
-.then(function(args){
-        /// args.reponse: "success", "cancelled", "failed"
-        console.log(JSON.stringify(args));
+var phone = require('nativescript-phone');
+phone
+  .sms('212-555-1234', 'My Message') //New Method for single number is phone.sms(["212-555-1234"],"My Message")
+  .then(
+    function (args) {
+      /// args.reponse: "success", "cancelled", "failed"
+      console.log(JSON.stringify(args));
     },
-    function(err){
-        console.log("Error: " + err);
+    function (err) {
+      console.log('Error: ' + err);
     }
-);
+  );
 ```
 
 Send to multiple numbers
 
 ```js
 // my-page.js
-var phone = require( "nativescript-phone" );
-phone.sms(["212-555-1234","212-555-1245"],"My Message")
-.then(function(args){
-        /// args.reponse: "success", "cancelled", "failed"
-        console.log(JSON.stringify(args));
-    },
-    function(err){
-        console.log("Error: " + err);
-    }
+var phone = require('nativescript-phone');
+phone.sms(['212-555-1234', '212-555-1245'], 'My Message').then(
+  function (args) {
+    /// args.reponse: "success", "cancelled", "failed"
+    console.log(JSON.stringify(args));
+  },
+  function (err) {
+    console.log('Error: ' + err);
+  }
 );
 ```
 
 #### requestCallPermission: Request Android Call_Phone Permission
-#### Parameters
-* explanation: The explanation text if the user denies permission twice (nullable).
-If you attempt to use `dial("122929912", false)` to not prompt on android 6.0, nothing will happen unless permission has been approved before.
-When this method is executed, a check for permissions happens, and a promise is returned.
-If the user refuse it, you can handle it via the `catch` method of promise. If it accepts you can dial in the `then`method.
-You should so "wrap" your `dial` method inside of the `requestCallPermission()` method (see following example).
 
+#### Parameters
+
+- explanation: The explanation text if the user denies permission twice (nullable).
+  If you attempt to use `dial("122929912", false)` to not prompt on android 6.0, nothing will happen unless permission has been approved before.
+  When this method is executed, a check for permissions happens, and a promise is returned.
+  If the user refuse it, you can handle it via the `catch` method of promise. If it accepts you can dial in the `then`method.
+  You should so "wrap" your `dial` method inside of the `requestCallPermission()` method (see following example).
 
 ### TypeScript example
 

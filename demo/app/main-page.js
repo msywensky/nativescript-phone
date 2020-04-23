@@ -7,24 +7,24 @@ var vm = new observable.Observable();
 vm.set('number', '800-555-5555');
 
 // Event handler for Page "loaded" event attached in main-page.xml
-function pageLoaded(args) {
+export function pageLoaded(args) {
   var page = args.object;
   page.bindingContext = vm;
 }
 
-function callNumber() {
+export function callNumber() {
   var number = vm.get('number');
   var dialResult = phone.dial(number, true);
   console.log(`dialResult: ${dialResult}`);
 }
 
-function callNumberWithoutPrompt() {
+export function callNumberWithoutPrompt() {
   var number = vm.get('number');
   var dialResult = phone.dial(number, false);
   console.log(`dialResult: ${dialResult}`);
 }
 
-function requestAndroidPerm() {
+export function requestAndroidPerm() {
   try {
     phone.requestCallPermission(
       'We need this permission to call the number without prompting user to confirm the number.'
@@ -34,26 +34,14 @@ function requestAndroidPerm() {
   }
 }
 
-function textNumber() {
+export function textNumber() {
   var number = vm.get('number');
   phone.sms([number], 'testing').then(
-    function(args) {
+    function (args) {
       console.log(JSON.stringify(args));
     },
-    function(err) {
+    function (err) {
       console.log('Error: ' + err);
     }
   );
 }
-
-/*
-Exporting a function in a NativeScript code-behind file makes it accessible
-to the file’s corresponding XML file. In this case, exporting the onNavigatingTo
-function here makes the navigatingTo="onNavigatingTo" binding in this page’s XML
-file work.
-*/
-exports.pageLoaded = pageLoaded;
-exports.callNumber = callNumber;
-exports.callNumberWithoutPrompt = callNumberWithoutPrompt;
-exports.textNumber = textNumber;
-exports.requestAndroidPerm = requestAndroidPerm;

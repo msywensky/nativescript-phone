@@ -1,3 +1,6 @@
+import { LocalEventEmitter } from './LocalEventEmitter';
+export declare const NSPhoneEventEmitter: LocalEventEmitter;
+
 /**
  * Initiate a phone call.
  * @param {string} number - The number to dial.

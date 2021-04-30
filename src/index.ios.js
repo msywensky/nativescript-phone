@@ -1,6 +1,7 @@
 import { Frame } from '@nativescript/core';
 import { DialEvents, SMSEvents } from './interfaces';
 import { LocalEventEmitter } from './LocalEventEmitter';
+export { DialEvents, SMSEvents } from './interfaces';
 export const NSPhoneEventEmitter = new LocalEventEmitter();
 var CustomMFMessageComposeViewControllerDelegate = /** @class */ (function (
   _super

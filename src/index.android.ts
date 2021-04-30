@@ -3,6 +3,8 @@ import { Application } from '@nativescript/core';
 import { LocalEventEmitter } from './LocalEventEmitter';
 import { SMSEvents, DialEvents } from './interfaces';
 
+export { DialEvents, SMSEvents } from './interfaces';
+
 export const NSPhoneEventEmitter = new LocalEventEmitter();
 
 export function dial(telNum, prompt) {

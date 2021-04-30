@@ -100,7 +100,7 @@ NSPhoneEventEmitter.on(SMSEvents.SUCCESS, args => {
   console.log('SMS Successful');
 });
 
-phone.NSPhoneEventEmitter.on(SMSEvents.CANCELLED, args => {
+NSPhoneEventEmitter.on(SMSEvents.CANCELLED, args => {
   console.log('SMS Cancelled');
 });
 

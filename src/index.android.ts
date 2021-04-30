@@ -35,6 +35,9 @@ export function dial(telNum, prompt) {
 
     activity.startActivity(intent);
 
+    NSPhoneEventEmitter.notify({
+      eventName: DialEvents.SUCCESS
+    });
     return true;
   } catch (ex) {
     NSPhoneEventEmitter.notify({
@@ -43,7 +46,7 @@ export function dial(telNum, prompt) {
         error: ex
       }
     });
-    return ex;
+    return false;
   }
 }
 

@@ -81,9 +81,14 @@ export function dial(telNum, prompt) {
 
     if (UIApplication.sharedApplication.canOpenURL(url)) {
       UIApplication.sharedApplication.openURL(url);
+      NSPhoneEventEmitter.notify({
+        eventName: DialEvents.SUCCESS
+      });
       return true;
     } else {
-      console.log('NativeScript-Phone: Unable to dial.');
+      NSPhoneEventEmitter.notify({
+        eventName: DialEvents.FAILED
+      });
       return false;
     }
   } catch (error) {

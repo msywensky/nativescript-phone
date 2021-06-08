@@ -1,3 +1,6 @@
+import { LocalEventEmitter } from './LocalEventEmitter';
+export declare const NSPhoneEventEmitter: LocalEventEmitter;
+
 /**
  * Initiate a phone call.
  * @param {string} number - The number to dial.
@@ -12,7 +15,7 @@ export function dial(number: string, confirm: boolean): boolean;
  * @param {string} message - The message to send.
  * @returns {Promise} response
  */
-export function sms(numbers: Array<string>, message: string): Promise<response>;
+export function sms(numbers: Array<string>, message: string);
 
 /**
  * Request Call Permission on Android (dummy function on ios).
@@ -25,4 +28,17 @@ interface response {
   success: string;
   cancelled: string;
   failed: string;
+}
+
+export declare enum SMSEvents {
+  FAILED = 'Failed',
+  SUCCESS = 'Success',
+  CANCELLED = 'Cancelled',
+  ERROR = 'Error',
+  UNKNOWN = 'Unknown'
+}
+export declare enum DialEvents {
+  FAILED = 'Failed',
+  SUCCESS = 'Success',
+  ERROR = 'Error'
 }

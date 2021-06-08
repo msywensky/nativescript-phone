@@ -2,28 +2,41 @@ import { hasPermission, requestPermission } from 'nativescript-permissions';
 import { Application } from '@nativescript/core';
 import { LocalEventEmitter } from './LocalEventEmitter';
 import { SMSEvents, DialEvents } from './interfaces';
+
 export { DialEvents, SMSEvents } from './interfaces';
+
 export const NSPhoneEventEmitter = new LocalEventEmitter();
+
 export function dial(telNum, prompt) {
   try {
     if (prompt === void 0) {
       prompt = true;
     }
     let intentType = android.content.Intent.ACTION_DIAL;
+
     if (prompt === false) {
+      // check permissions
       const hasPerms = hasPermission(android.Manifest.permission.CALL_PHONE);
       if (hasPerms === false) {
         return 'Application does not have permission to call directly.';
       }
+
       intentType = android.content.Intent.ACTION_CALL;
     }
+
     const intent = new android.content.Intent(intentType);
+
+    // support for ussd numbers with # on android
     telNum = telNum.replace('#', encodeURIComponent('#'));
+
     intent.setData(android.net.Uri.parse('tel:' + telNum));
+
     const activity =
       Application.android.foregroundActivity ||
       Application.android.startActivity;
+
     activity.startActivity(intent);
+
     NSPhoneEventEmitter.notify({
       eventName: DialEvents.SUCCESS
     });
@@ -38,11 +51,13 @@ export function dial(telNum, prompt) {
     return false;
   }
 }
+
 export function sms(smsNum, messageText) {
   try {
     if (!Array.isArray(smsNum)) {
       smsNum = [smsNum];
     }
+
     const SEND_SMS = 1001;
     const intent = new android.content.Intent(
       android.content.Intent.ACTION_VIEW
@@ -50,13 +65,18 @@ export function sms(smsNum, messageText) {
     intent.putExtra('sms_body', messageText);
     intent.setType('vnd.android-dir/mms-sms');
     intent.setData(android.net.Uri.parse('sms:' + smsNum.join(';')));
+
     const activity =
       Application.android.foregroundActivity ||
       Application.android.startActivity;
+
     activity.startActivityForResult(intent, SEND_SMS);
+
     const previousResult = activity.onActivityResult;
+
     activity.onActivityResult = (requestCode, resultCode, data) => {
       activity.onActivityResult = previousResult;
+      // Check which request we're responding to
       if (requestCode === SEND_SMS) {
         if (resultCode === android.app.Activity.RESULT_OK) {
           NSPhoneEventEmitter.notify({
@@ -72,8 +92,9 @@ export function sms(smsNum, messageText) {
           });
         }
       } else {
+        // activity result not handled by this plugin
         if (typeof previousResult === 'function') {
-          previousResult(requestCode, resultCode, data);
+          previousResult(requestCode, resultCode, data); // pass to previous result handler
         }
       }
     };
@@ -86,7 +107,7 @@ export function sms(smsNum, messageText) {
     });
   }
 }
+
 export function requestCallPermission(explanation) {
   return requestPermission(android.Manifest.permission.CALL_PHONE, explanation);
 }
-//# sourceMappingURL=index.android.js.map

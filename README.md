@@ -82,34 +82,46 @@ Send to one number (provided for backwards compatibility)
 
 ```js
 // my-page.js
-var phone = require('nativescript-phone');
-phone
-  .sms('212-555-1234', 'My Message') //New Method for single number is phone.sms(["212-555-1234"],"My Message")
-  .then(
-    function (args) {
-      /// args.reponse: "success", "cancelled", "failed"
-      console.log(JSON.stringify(args));
-    },
-    function (err) {
-      console.log('Error: ' + err);
-    }
-  );
+
+import {
+  NSPhoneEventEmitter,
+  sms,
+  dial,
+  requestCallPermission,
+  SMSEvents,
+  DialEvents
+} from 'nativescript-phone';
+
+NSPhoneEventEmitter.on(SMSEvents.FAILED, args => {
+  console.log('FAILED', args.data);
+});
+
+NSPhoneEventEmitter.on(SMSEvents.SUCCESS, args => {
+  console.log('SMS Successful');
+});
+
+NSPhoneEventEmitter.on(SMSEvents.CANCELLED, args => {
+  console.log('SMS Cancelled');
+});
+
+NSPhoneEventEmitter.on(SMSEvents.ERROR, args => {
+  console.log('SMS ERROR', args.data);
+});
+
+NSPhoneEventEmitter.on(SMSEvents.UNKNOWN, args => {
+  console.log('SMS UNKNOWN', args.data);
+});
+
+sms(['212-555-1234'], 'testing');
 ```
 
 Send to multiple numbers
 
 ```js
-// my-page.js
-var phone = require('nativescript-phone');
-phone.sms(['212-555-1234', '212-555-1245'], 'My Message').then(
-  function (args) {
-    /// args.reponse: "success", "cancelled", "failed"
-    console.log(JSON.stringify(args));
-  },
-  function (err) {
-    console.log('Error: ' + err);
-  }
-);
+import { sms } from 'nativescript-phone';
+// Use the event system to listen for failure, success, cancelled, error events
+
+sms(['212-555-1234', '212-555-1245'], 'My Message');
 ```
 
 #### requestCallPermission: Request Android Call_Phone Permission
@@ -124,27 +136,36 @@ phone.sms(['212-555-1234', '212-555-1245'], 'My Message').then(
 
 ### TypeScript example
 
-```TypeScript
+```ts
+import {
+  NSPhoneEventEmitter,
+  sms,
+  dial,
+  requestCallPermission,
+  SMSEvents,
+  DialEvents
+} from 'nativescript-phone';
 
-import * as TNSPhone from 'nativescript-phone';
+NSPhoneEventEmitter.on(SMSEvents.ERROR, args => {
+  console.log('SMS ERROR', args.data);
+});
+
+NSPhoneEventEmitter.on(SMSEvents.UNKNOWN, args => {
+  console.log('SMS UNKNOWN', args.data);
+});
 
 /// Dial a phone number.
-public callHome() {
-   const phoneNumber = '415-123-4567';
-   TNSPhone.requestCallPermission('You should accept the permission to be able to make a direct phone call.')
-      .then(() => TNSPhone.dial(phoneNumber, false))
-      .catch(() => TNSPhone.dial(phoneNumber, true));
+function callHome() {
+  const phoneNumber = '415-123-4567';
+  requestCallPermission(
+    'You should accept the permission to be able to make a direct phone call.'
+  )
+    .then(() => dial(phoneNumber, false))
+    .catch(() => dial(phoneNumber, true));
 }
 
 // Text a number (or multiple numbers)
-public messageParents() {
-    TNSPhone.sms(['212-555-1234', '212-555-0987'], "Text till your fingers bleed")
-        .then((args) => {
-            console.log(JSON.stringify(args));
-        }, (err) => {
-            console.log('Error: ' + err);
-        })
+function messageParents() {
+  sms(['212-555-1234', '212-555-0987'], 'Text till your fingers bleed');
 }
-
-
 ```

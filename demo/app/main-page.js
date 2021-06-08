@@ -1,32 +1,73 @@
-// @ts-check
-var phone = require('nativescript-phone');
-var app = require('tns-core-modules/application');
-var observable = require('tns-core-modules/data/observable');
-var vm = new observable.Observable();
+import {
+  NSPhoneEventEmitter,
+  sms,
+  dial,
+  requestCallPermission,
+  SMSEvents,
+  DialEvents
+} from 'nativescript-phone';
+import { Observable } from '@nativescript/core';
+const vm = new Observable();
 
 vm.set('number', '800-555-5555');
 
+NSPhoneEventEmitter.on(SMSEvents.FAILED, args => {
+  console.log('FAILED', args.data);
+});
+
+NSPhoneEventEmitter.on(SMSEvents.SUCCESS, args => {
+  console.log('SMS Successful');
+});
+
+NSPhoneEventEmitter.on(SMSEvents.CANCELLED, args => {
+  console.log('SMS Cancelled');
+});
+
+NSPhoneEventEmitter.on(SMSEvents.ERROR, args => {
+  console.log('SMS ERROR', args.data);
+});
+
+NSPhoneEventEmitter.on(SMSEvents.UNKNOWN, args => {
+  console.log('SMS UNKNOWN', args.data);
+});
+
 // Event handler for Page "loaded" event attached in main-page.xml
 export function pageLoaded(args) {
-  var page = args.object;
+  const page = args.object;
   page.bindingContext = vm;
 }
 
 export function callNumber() {
-  var number = vm.get('number');
-  var dialResult = phone.dial(number, true);
+  const number = vm.get('number');
+
+  NSPhoneEventEmitter.once(DialEvents.FAILED, args => {
+    console.log('Dial FAILED', args.data);
+  });
+  NSPhoneEventEmitter.once(DialEvents.ERROR, args => {
+    console.log('Dial ERROR', args.data);
+  });
+
+  const dialResult = dial(number, true);
   console.log(`dialResult: ${dialResult}`);
 }
 
 export function callNumberWithoutPrompt() {
-  var number = vm.get('number');
-  var dialResult = phone.dial(number, false);
+  const number = vm.get('number');
+
+  NSPhoneEventEmitter.once(DialEvents.FAILED, args => {
+    console.log('Dial FAILED', args.data);
+  });
+  NSPhoneEventEmitter.once(DialEvents.ERROR, args => {
+    console.log('Dial ERROR', args.data);
+  });
+
+  const dialResult = dial(number, false);
   console.log(`dialResult: ${dialResult}`);
 }
 
 export function requestAndroidPerm() {
   try {
-    phone.requestCallPermission(
+    requestCallPermission(
       'We need this permission to call the number without prompting user to confirm the number.'
     );
   } catch (e) {
@@ -35,13 +76,7 @@ export function requestAndroidPerm() {
 }
 
 export function textNumber() {
-  var number = vm.get('number');
-  phone.sms([number], 'testing').then(
-    function (args) {
-      console.log(JSON.stringify(args));
-    },
-    function (err) {
-      console.log('Error: ' + err);
-    }
-  );
+  const number = vm.get('number');
+
+  sms([number], 'testing');
 }

@@ -4,6 +4,7 @@ demo/platforms/
 node_modules/
 
 *.log
+*.tgz
 
 src/**/*.js
 src/index.android.js

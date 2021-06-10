@@ -6,6 +6,10 @@ node_modules/
 *.log
 
 src/**/*.js
+src/index.android.js
+src/index.ios.js
+src/interfaces.js
+src/LocalEventEmitter.js
 src/**/*.map
 src/**/*.d.ts
 

@@ -12,11 +12,16 @@ NativeScript plugin to use the device phone and SMS features for Android and iOS
 
 ## Installation
 
-Install the plugin using the NativeScript CLI tooling
+Install the plugin using the NativeScript CLI
 
 ```
 tns plugin add nativescript-phone
 ```
+
+### Breaking Change with 3.x.x
+
+Version 3.x.x and later uses an event system to dispatch events for the handling of success, failure, errors for the SMS and Dial methods.
+See the snippets below for the correct usage of the event emitter system.
 
 ## Video Tutorial
 

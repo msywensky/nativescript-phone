@@ -27,7 +27,7 @@ export function dial(telNum, prompt) {
     const intent = new android.content.Intent(intentType);
 
     // support for ussd numbers with # on android
-    telNum = telNum.replace('#', encodeURIComponent('#'));
+    telNum = telNum.replace(/#/g, encodeURIComponent('#'));
 
     intent.setData(android.net.Uri.parse('tel:' + telNum));
 

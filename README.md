@@ -7,7 +7,7 @@ NativeScript plugin to use the device phone and SMS features for Android and iOS
 
 ### Native Info
 
-- Android uses an Intent with [ACTION_CALL](https://developer.android.com/reference/android/content/Intent.html#ACTION_CALL) for phone calls & [ACTION_VIEW](https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW) for SMS.
+- Android uses an Intent with [ACTION_CALL](https://developer.android.com/reference/android/content/Intent.html#ACTION_CALL) for phone calls & [ACTION_SENDTO](https://developer.android.com/reference/android/content/Intent.html#ACTION_SENDTO) for SMS.
 - iOS uses the [telprompt](https://developer.apple.com/library/content/featuredarticles/iPhoneURLScheme_Reference/PhoneLinks/PhoneLinks.html) for phone calls & [MFMessageComposeViewController](https://developer.apple.com/reference/messageui/mfmessagecomposeviewcontroller) for SMS.
 
 ## Installation

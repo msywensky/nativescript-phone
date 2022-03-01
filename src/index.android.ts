@@ -60,10 +60,9 @@ export function sms(smsNum, messageText) {
 
     const SEND_SMS = 1001;
     const intent = new android.content.Intent(
-      android.content.Intent.ACTION_VIEW
+      android.content.Intent.ACTION_SENDTO
     );
     intent.putExtra('sms_body', messageText);
-    intent.setType('vnd.android-dir/mms-sms');
     intent.setData(android.net.Uri.parse('sms:' + smsNum.join(';')));
 
     const activity =

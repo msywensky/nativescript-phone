@@ -1,0 +1,13 @@
+{
+     "uses": [
+          "android.app:Activity",
+          "android.content:Intent",
+          "android.net:Uri",
+          "android.os:Bundle",
+          "android.os:Parcelable",
+          "android:Manifest",
+          "android:Manifest.permission",
+          "androidNative:Array",
+          "java.io:Serializable"
+     ]
+}

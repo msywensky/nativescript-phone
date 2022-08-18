@@ -1,7 +1,7 @@
 const { exec } = require('child_process');
 const semver = require('semver');
 
-exec('tns --version', (err, stdout, stderr) => {
+exec('tns --version --json', (err, stdout, stderr) => {
   if (err) {
     // node couldn't execute the command
     console.log(`tns --version err: ${err}`);

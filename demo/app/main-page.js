@@ -69,7 +69,8 @@ export function requestAndroidPerm() {
   try {
     requestCallPermission(
       'We need this permission to call the number without prompting user to confirm the number.'
-    );
+    ).then(()=>console.log("OK"))
+    .catch(err=> console.log(err));
   } catch (e) {
     console.log(e);
   }

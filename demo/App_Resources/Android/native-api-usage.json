@@ -1,0 +1,5 @@
+{
+    "whitelist-plugins-usages": true,
+    "whitelist": ["androidx.activity:ComponentActivity"],
+    "blacklist": []
+}

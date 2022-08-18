@@ -13,11 +13,12 @@
     "jsconfig.json"
   ],
   "dependencies": {
-    "nativescript-phone": "file:../src/nativescript-phone-3.0.0.tgz",
+    "@nativescript/core": "~8.0.0",
     "@nativescript/theme": "~3.0.1",
-    "@nativescript/core": "~8.0.0"
+    "nativescript-phone": "file:../publish/package/nativescript-phone-3.0.4.tgz"
   },
   "devDependencies": {
+    "@nativescript/android": "8.2.4",
     "@nativescript/ios": "8.0.0",
     "@nativescript/types": "~8.0.1",
     "@nativescript/webpack": "beta"

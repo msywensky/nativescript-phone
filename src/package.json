@@ -43,7 +43,7 @@
   "devDependencies": {
     "@nativescript/core": "~8.0.3",
     "@nativescript/types": "~8.0.1",
-    "@nativescript/webpack": "~4.1.0",
+    "@nativescript/webpack": "~5.0.12",
     "husky": "~4.2.5",
     "lint-staged": "~10.1.7",
     "prettier": "~2.2.1",
